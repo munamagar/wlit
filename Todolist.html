@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>To-Do List</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      margin: 0;
+      padding: 20px;
+    }
+    
+    h1 {
+      text-align: center;
+    }
+    
+    #todo-list {
+      max-width: 400px;
+      margin: 0 auto;
+    }
+    
+    #todo-list input[type="text"] {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 10px;
+      font-size: 16px;
+      border: 1px solid #ccc;
+    }
+    
+    #todo-list ul {
+      list-style-type: none;
+      padding: 0;
+    }
+    
+    #todo-list li {
+      background-color: #fff;
+      padding: 10px;
+      margin-bottom: 5px;
+      border-radius: 5px;
+    }
+    
+    #todo-list li.completed {
+      background-color: #e6e6e6;
+      text-decoration: line-through;
+    }
+    
+    #todo-list li span {
+      cursor: pointer;
+      margin-right: 10px;
+    }
+  </style>
+</head>
+<body>
+  <h1>To-Do List</h1>
+  <div id="todo-list">
+    <input type="text" id="todo-input" placeholder="Enter a task">
+    <ul id="tasks"></ul>
+  </div>
+  
+  <script>
+    // Get necessary elements
+    const todoInput = document.getElementById('todo-input');
+    const tasksList = document.getElementById('tasks');
+    
+    // Function to add a new task
+    function addTask() {
+      const taskText = todoInput.value.trim();
+      if (taskText !== '') {
+        const li = document.createElement('li');
+        const span = document.createElement('span');
+        const taskNode = document.createTextNode(taskText);
+        span.innerHTML = '&#x2713;';
+        
+        span.addEventListener('click', () => {
+          li.classList.toggle('completed');
+        });
+        
+        li.appendChild(span);
+        li.appendChild(taskNode);
+        tasksList.appendChild(li);
+        todoInput.value = '';
+      }
+    }
+    
+    // Event listener for adding a new task on Enter key press
+    todoInput.addEventListener('keyup', (event) => {
+      if (event.keyCode === 13) {
+        addTask();
+      }
+    });
+  </script>
+</body>
+</html>
+
